@@ -19,6 +19,10 @@ universal_normal_keymap("<C-s>", ":w<CR>", { noremap = true, silent = true })
 --Redo
 vim.api.nvim_set_keymap('n', "U", "<C-r>", { noremap = true })
 
+-- visual tab
+vim.api.nvim_set_keymap("x", "<", "<gv", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("x", ">", ">gv", { noremap = true, silent = true })
+
 -- Jump
 -- Jump Prev
 vim.api.nvim_set_keymap('n', "[", '<C-o>', { noremap = true })
