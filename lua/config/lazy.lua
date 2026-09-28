@@ -29,6 +29,7 @@ require("lazy").setup({
   },
   -- automatically check for plugin updates
   checker = { enabled = true, frequency = 86400, notify = false },
+  change_detection = { enabled = false, notify = false },
   install = {
     missing = true,
     colorscheme = { "vscode" },
