@@ -63,7 +63,7 @@ universal_normal_keymap("<C-d>", ':lua Snacks.picker("lsp_symbols")<CR>', { nore
 --diagnostic
 universal_normal_keymap("?", ':lua Snacks.picker("diagnostics")<CR>', { noremap = true, silent = true })
 -- all picker
-universal_normal_keymap("<C-f>", ':lua require("utils.picker").show()<CR>', { noremap = true, silent = true })
+universal_normal_keymap("<C-f>", ':lua require("utils.action").show()<CR>', { noremap = true, silent = true })
 
 -- floaterm
 -- toggle
@@ -75,4 +75,3 @@ vim.api.nvim_set_keymap('t', "<C-l>", '<C-\\><C-n>:FloatermNext<CR>', { noremap 
 vim.api.nvim_set_keymap('t', "<C-v>", '<C-\\><C-n>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('t', "<C-t>", '<C-\\><C-n>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('t', "<C-q>", '<C-\\><C-n>:FloatermKill<CR>:FloatermToggle<CR>', { noremap = true, silent = true })
-

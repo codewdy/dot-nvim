@@ -187,6 +187,13 @@ return {
           ui_select = false,
         },
       }
+      require("utils.action").register{
+        name = "snacks",
+        priority = -1,
+        actions = function()
+          return require("snacks").picker
+        end
+      }
     end
   }
 }

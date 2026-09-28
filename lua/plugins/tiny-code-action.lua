@@ -20,6 +20,10 @@ return {
             }),
           },
         },
+        require("utils.action").register{
+          name = "code-action",
+          actions = { code_action = require("tiny-code-action").code_action }
+        }
       }
     end,
   }
