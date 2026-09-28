@@ -7,6 +7,7 @@ return {
       require("config.base")
       require("config.clipboard")
       require("config.mapping")
+      require("config.actions")
       require("lsp_conf")
     end,
   }

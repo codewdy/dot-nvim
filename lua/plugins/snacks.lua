@@ -188,11 +188,17 @@ return {
         },
       }
       require("utils.action").register{
-        name = "snacks",
+        name = "snacks-pickers",
         priority = -1,
         actions = function()
           return require("snacks").picker
         end
+      }
+      require("utils.action").register{
+        name = "snacks",
+        actions = {
+          lazygit = require("snacks").lazygit,
+        }
       }
     end
   }
