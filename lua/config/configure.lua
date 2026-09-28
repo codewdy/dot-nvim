@@ -26,6 +26,7 @@ local configure = {
       hidden = true,  -- make buffer management can hide buffer without save.
       cursorline = true,
       mouse = '',
+      winborder = "rounded",
     },
     g = {
       loaded_matchit = 1,  -- disable matchit becasue ampping troubles.
