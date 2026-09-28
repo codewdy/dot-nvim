@@ -93,7 +93,9 @@ return {
             }
           },
           diagnostics = {
-            line_width = "full"
+            line_width = "full",
+            path_display = "hidden",
+            wrap_results = true,
           }
         },
         extensions = {

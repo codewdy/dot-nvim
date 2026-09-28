@@ -60,6 +60,8 @@ universal_normal_keymap("<C-o>", ':Telescope find_files<CR>', { noremap = true, 
 universal_normal_keymap("<C-p>", ':Telescope live_grep<CR>', { noremap = true, silent = true })
 --symbols
 universal_normal_keymap("<C-d>", ':Telescope symbols<CR>', { noremap = true, silent = true })
+--diagnostic
+universal_normal_keymap("?", ':Telescope diagnostics<CR>', { noremap = true, silent = true })
 -- all picker
 universal_normal_keymap("<C-f>", ':Telescope builtin<CR>', { noremap = true, silent = true })
 
