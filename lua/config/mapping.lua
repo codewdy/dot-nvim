@@ -17,7 +17,7 @@ universal_keymap("<C-c>", "<Esc>", {})
 universal_normal_keymap("<C-s>", ":w<CR>", { noremap = true, silent = true })
 
 --Redo
-vim.api.nvim_set_keymap('n', "U", "<C-r>", {})
+vim.api.nvim_set_keymap('n', "U", "<C-r>", { noremap = true })
 
 -- Jump
 -- Jump Prev
@@ -55,15 +55,15 @@ vim.api.nvim_set_keymap('n', "<C-r>", ':lua vim.lsp.buf.rename()<CR>', { noremap
 
 -- picker
 -- file
-universal_normal_keymap("<C-o>", ':Telescope find_files<CR>', { noremap = true, silent = true })
+universal_normal_keymap("<C-o>", ':lua Snacks.picker("files")<CR>', { noremap = true, silent = true })
 -- grep
-universal_normal_keymap("<C-p>", ':Telescope live_grep<CR>', { noremap = true, silent = true })
+universal_normal_keymap("<C-p>", ':lua Snacks.picker("grep")<CR>', { noremap = true, silent = true })
 --symbols
-universal_normal_keymap("<C-d>", ':Telescope symbols<CR>', { noremap = true, silent = true })
+universal_normal_keymap("<C-d>", ':lua Snacks.picker("lsp_symbols")<CR>', { noremap = true, silent = true })
 --diagnostic
-universal_normal_keymap("?", ':Telescope diagnostics<CR>', { noremap = true, silent = true })
+universal_normal_keymap("?", ':lua Snacks.picker("diagnostics")<CR>', { noremap = true, silent = true })
 -- all picker
-universal_normal_keymap("<C-f>", ':Telescope builtin<CR>', { noremap = true, silent = true })
+universal_normal_keymap("<C-f>", ':lua require("utils.picker").show()<CR>', { noremap = true, silent = true })
 
 -- floaterm
 -- toggle

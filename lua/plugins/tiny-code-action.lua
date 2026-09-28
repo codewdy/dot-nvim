@@ -7,10 +7,9 @@ return {
     event = "LspAttach",
     config = function ()
       require("tiny-code-action").setup{
-        picker = {"telescope", opts = {}},
+        picker = {"snacks", opts = {}},
         backend = "difftastic",
       }
-      require("telescope.builtin").code_action = require("tiny-code-action").code_action
     end,
   }
 }
