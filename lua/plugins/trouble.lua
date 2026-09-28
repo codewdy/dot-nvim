@@ -35,6 +35,7 @@ return {
       local symbols_view
       local diagnostics_view
       local resizing = false
+      local quitting = false
 
       local function resize_sidebar()
         if resizing
@@ -91,11 +92,50 @@ return {
         end)
       end
 
+      local function quit_if_only_sidebar_remains()
+        vim.schedule(function()
+          if quitting
+              or not symbols_view
+              or not diagnostics_view
+              or not symbols_view.win:valid()
+              or not diagnostics_view.win:valid() then
+            return
+          end
+
+          local windows = vim.api.nvim_list_wins()
+          if #windows ~= 2 then
+            return
+          end
+
+          local sidebar_windows = {
+            [symbols_view.win.win] = true,
+            [diagnostics_view.win.win] = true,
+          }
+          if not sidebar_windows[windows[1]] or not sidebar_windows[windows[2]] then
+            return
+          end
+
+          quitting = true
+          local ok, err = pcall(vim.cmd, "quitall")
+          if not ok then
+            quitting = false
+            vim.notify(err, vim.log.levels.WARN, { title = "Trouble sidebar" })
+          end
+        end)
+      end
+
+      local sidebar_group = vim.api.nvim_create_augroup("trouble_sidebar", { clear = true })
+
       vim.api.nvim_create_autocmd({ "VimResized", "WinResized" }, {
-        group = vim.api.nvim_create_augroup("trouble_sidebar_ratio", { clear = true }),
+        group = sidebar_group,
         callback = function()
           vim.schedule(resize_sidebar)
         end,
+      })
+
+      vim.api.nvim_create_autocmd("WinClosed", {
+        group = sidebar_group,
+        callback = quit_if_only_sidebar_remains,
       })
 
       vim.schedule(function()
@@ -105,4 +145,5 @@ return {
     cmd = "Trouble",
   }
 }
+
 
