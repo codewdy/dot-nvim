@@ -73,5 +73,6 @@ vim.api.nvim_set_keymap('t', "<C-n>", '<C-\\><C-n>:FloatermNew<CR>', { noremap =
 vim.api.nvim_set_keymap('t', "<C-h>", '<C-\\><C-n>:FloatermPrev<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('t', "<C-l>", '<C-\\><C-n>:FloatermNext<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('t', "<C-v>", '<C-\\><C-n>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('t', "<C-t>", '<C-\\><C-n>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('t', "<C-q>", '<C-\\><C-n>:FloatermKill<CR>:FloatermToggle<CR>', { noremap = true, silent = true })
 

@@ -8,7 +8,18 @@ return {
     config = function ()
       require("tiny-code-action").setup{
         picker = {"snacks", opts = {}},
-        backend = "difftastic",
+        backend = "delta",
+        backend_opts = {
+          delta = {
+            header_lines_to_remove = 0,
+            args = require("utils.delta").args({
+              -- Ignore global diff.external when comparing the temporary files.
+              "--diff-args=--no-ext-diff",
+              "--file-style=omit",
+              "--hunk-header-style=omit",
+            }),
+          },
+        },
       }
     end,
   }
