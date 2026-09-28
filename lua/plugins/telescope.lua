@@ -5,6 +5,7 @@ return {
         'nvim-lua/plenary.nvim',
         -- optional but recommended
         { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+        "nvim-telescope/telescope-ui-select.nvim",
     },
     config = function()
       actions = require "telescope.actions"
@@ -98,28 +99,8 @@ return {
             wrap_results = true,
           }
         },
-        extensions = {
-          aerial = {
-            col1_width = 4,
-            col2_width = 30,
-            format_symbol = function(symbol_path, filetype)
-              if filetype == "json" or filetype == "yaml" then
-                return table.concat(symbol_path, ".")
-              else
-                return string.rep("┃ ", #symbol_path - 1) .. symbol_path[#symbol_path]
-              end
-            end,
-            show_columns = "both",
-          },
-        },
       }
-
-      vim.api.nvim_create_autocmd("User", {
-        pattern = "TelescopePreviewerLoaded",
-        callback = function(args)
-          vim.wo.number = true
-        end,
-      })
+      require("telescope").load_extension("ui-select")
     end,
   }
 }

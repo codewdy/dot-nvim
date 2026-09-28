@@ -43,9 +43,9 @@ vim.api.nvim_set_keymap('n', "K", '<C-u>', { noremap = true, silent = true })
 -- down
 vim.api.nvim_set_keymap('n', "J", '<C-d>', { noremap = true, silent = true })
 -- lsp next
-vim.api.nvim_set_keymap('n', "<C-k>", ':AerialPrev<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', "<C-k>", ':lua require("trouble").prev{mode="symbols", jump=true, focus=false}<CR>', { noremap = true, silent = true })
 -- lsp prev
-vim.api.nvim_set_keymap('n', "<C-j>", ':AerialNext<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', "<C-j>", ':lua require("trouble").next{mode="symbols", jump=true, focus=false}<CR>', { noremap = true, silent = true })
 
 -- lsp
 -- hover
