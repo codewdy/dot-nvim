@@ -46,8 +46,3 @@ vim.api.nvim_create_autocmd("BufEnter", {
     end
   end,
 })
-
-local function x()
-  print("A")
-end
-require("telescope.builtin").xx = x

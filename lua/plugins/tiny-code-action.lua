@@ -2,7 +2,7 @@ return {
   {
     "rachartier/tiny-code-action.nvim",
     dependencies = {
-      { "nvim-telescope/telescope.nvim" }
+      "folke/snacks.nvim"
     },
     event = "LspAttach",
     config = function ()
