@@ -70,7 +70,7 @@ local configure = {
     },
   },
   root_files = {
-    { ".root" },
+    { ".root.json", ".root" },
     { ".git" },
   },
 }

@@ -1,8 +1,6 @@
 return {
   {
     "stevearc/conform.nvim",
-    event = "BufWritePre",
-    cmd = { "ConformInfo", "Format" },
     opts = {
       formatters_by_ft = {
         -- lua
@@ -45,7 +43,13 @@ return {
         lsp_format = "fallback",
         timeout_ms = 2000,
       },
-      format_on_save = { timeout_ms = 2000 },
+      format_on_save = function(bufnr)
+        -- Disable with a global or buffer-local variable
+        if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+          return
+        end
+        return { timeout_ms = 2000, lsp_format = "fallback" }
+      end,
     },
     config = function(_, opts)
       local conform = require("conform")
@@ -62,6 +66,11 @@ return {
         end
         conform.format({ range = range })
       end, { range = true, desc = "Format buffer or selection with Conform" })
+
+      require("utils.action").register({
+        name = "conform",
+        actions = { format = require("conform").format },
+      })
     end,
   },
 }
