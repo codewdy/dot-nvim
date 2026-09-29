@@ -58,6 +58,15 @@ return {
         -- Default: nil
         custom_resolver = nil,
       })
+      -- Rebuilding context extmarks on every movement stalls repeated j/k.
+      -- Refresh once the cursor settles (updatetime), or on buffer entry.
+      local group = vim.api.nvim_create_augroup("nvim_context_vt", { clear = true })
+      vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI", "BufEnter" }, {
+        group = group,
+        callback = function()
+          require("nvim_context_vt").show_context()
+        end,
+      })
       vim.cmd([[ au BufEnter * hi CustomContextVt guifg=#666666 ]])
     end,
   },
