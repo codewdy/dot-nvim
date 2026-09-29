@@ -2,7 +2,7 @@ require("lsp_conf.base")
 require("lsp_conf.lua_ls")
 require("lsp_conf.vtsls")
 
-vim.lsp.enable({
+local servers = {
   -- lua
   "lua_ls",
   -- c, cpp
@@ -31,4 +31,8 @@ vim.lsp.enable({
   "lemminx",
   -- cmake
   "cmake",
-})
+}
+
+vim.lsp.enable(servers)
+
+return servers

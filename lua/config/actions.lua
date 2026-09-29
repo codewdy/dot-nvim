@@ -2,6 +2,7 @@ require("utils.action").register({
   name = "user-define-action",
   prioirty = 1000,
   actions = {
+    check_dependencies = require("actions.check_dependencies"),
     generate_root = require("actions.generate_root"),
     lsp_rename = vim.lsp.buf.rename,
     switch_source_header = function()
