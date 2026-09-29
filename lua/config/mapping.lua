@@ -39,7 +39,7 @@ vim.api.nvim_set_keymap('n', "L", ':WintabsMove 1<CR>', { noremap = true, silent
 -- move to prev
 vim.api.nvim_set_keymap('n', "H", ':WintabsMove -1<CR>', { noremap = true, silent = true })
 -- close
-universal_normal_keymap("<C-q>", ':WintabsClose<CR>', { noremap = true, silent = true })
+universal_normal_keymap("<C-q>", ':ConfigQuit<CR>', { noremap = true, silent = true })
 
 -- navigator
 -- up
