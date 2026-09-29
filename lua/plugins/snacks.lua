@@ -55,8 +55,8 @@ local function diagnostic_without_location(item, picker)
     pos = false,
     item = {
       source = false,
-      code = false
-    }
+      code = false,
+    },
   })
 
   return Snacks.picker.format.diagnostic(display_item, picker)
@@ -68,7 +68,7 @@ return {
     priority = 1000,
     lazy = false,
     config = function()
-      require("snacks").setup{
+      require("snacks").setup({
         bigfile = { enabled = true },
         lazygit = { enabled = true },
         quickfile = { enabled = true },
@@ -190,20 +190,20 @@ return {
           enable = true,
           ui_select = false,
         },
-      }
-      require("utils.action").register{
+      })
+      require("utils.action").register({
         name = "snacks-pickers",
         priority = -1,
         actions = function()
           return require("snacks").picker
-        end
-      }
-      require("utils.action").register{
+        end,
+      })
+      require("utils.action").register({
         name = "snacks",
         actions = {
           lazygit = require("snacks").lazygit,
-        }
-      }
-    end
-  }
+        },
+      })
+    end,
+  },
 }

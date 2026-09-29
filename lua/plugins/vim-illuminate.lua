@@ -1,7 +1,6 @@
 return {
-    {
-        'RRethy/vim-illuminate',
-        config = function()
-        end
-    }
+  {
+    "RRethy/vim-illuminate",
+    config = function() end,
+  },
 }

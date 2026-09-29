@@ -1,28 +1,29 @@
 return {
   {
-    'nvim-telescope/telescope.nvim', version = '*',
+    "nvim-telescope/telescope.nvim",
+    version = "*",
     dependencies = {
-        'nvim-lua/plenary.nvim',
-        -- optional but recommended
-        { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-        "nvim-telescope/telescope-ui-select.nvim",
+      "nvim-lua/plenary.nvim",
+      -- optional but recommended
+      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+      "nvim-telescope/telescope-ui-select.nvim",
     },
     config = function()
-      actions = require "telescope.actions"
+      actions = require("telescope.actions")
 
-      require('telescope').setup{
+      require("telescope").setup({
         defaults = {
           sorting_strategy = "ascending",
           layout_strategy = "horizontal",
           layout_config = {
             preview_cutoff = 1,
             width = 0.8,
-            height = 0.8
+            height = 0.8,
           },
           layout_config = {
             horizontal = {
-              prompt_position = 'top',    -- Puts the search bar at the top
-              preview_width = 0.55,       -- Width of the preview pane
+              prompt_position = "top", -- Puts the search bar at the top
+              preview_width = 0.55, -- Width of the preview pane
               results_width = 0.8,
             },
           },
@@ -85,22 +86,22 @@ return {
 
               ["?"] = actions.which_key,
             },
-          }
+          },
         },
         pickers = {
           live_grep = {
             path_display = {
-              shorten = 2
-            }
+              shorten = 2,
+            },
           },
           diagnostics = {
             line_width = "full",
             path_display = "hidden",
             wrap_results = true,
-          }
+          },
         },
-      }
+      })
       require("telescope").load_extension("ui-select")
     end,
-  }
+  },
 }

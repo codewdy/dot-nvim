@@ -1,11 +1,11 @@
 local configure = {
   vim = {
     o = {
-      filetype = 'on',
-      fileencodings = 'ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1',
+      filetype = "on",
+      fileencodings = "ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1",
       updatetime = 200,
       undofile = true,
-      backspace = 'indent,eol,start',
+      backspace = "indent,eol,start",
       writebackup = false,
       swapfile = false,
       wrap = false,
@@ -16,20 +16,20 @@ local configure = {
       tabstop = 2,
       shiftwidth = 2,
       softtabstop = 2,
-      colorcolumn = '80',
+      colorcolumn = "80",
       scrolloff = 9999,
       sidescrolloff = 15,
       sidescroll = 1,
       showmatch = true,
       foldlevelstart = 99,
-      signcolumn = 'yes',
-      hidden = true,  -- make buffer management can hide buffer without save.
+      signcolumn = "yes",
+      hidden = true, -- make buffer management can hide buffer without save.
       cursorline = true,
-      mouse = '',
+      mouse = "",
       winborder = "rounded",
     },
     g = {
-      loaded_matchit = 1,  -- disable matchit becasue ampping troubles.
+      loaded_matchit = 1, -- disable matchit becasue ampping troubles.
     },
   },
   filetype = {
@@ -40,13 +40,13 @@ local configure = {
         softtabstop = 2,
       },
       wo = {
-        foldmethod='expr',
-        foldexpr='nvim_treesitter#foldexpr()',
-      }
+        foldmethod = "expr",
+        foldexpr = "nvim_treesitter#foldexpr()",
+      },
     },
-    c = 'cpp',
-    h = 'cpp',
-    hpp = 'cpp',
+    c = "cpp",
+    h = "cpp",
+    hpp = "cpp",
     python = {
       bo = {
         tabstop = 4,
@@ -54,9 +54,9 @@ local configure = {
         softtabstop = 4,
       },
       wo = {
-        foldmethod='expr',
-        foldexpr='nvim_treesitter#foldexpr()',
-      }
+        foldmethod = "expr",
+        foldexpr = "nvim_treesitter#foldexpr()",
+      },
     },
     default = {
       bo = {
@@ -65,13 +65,13 @@ local configure = {
         softtabstop = 2,
       },
       wo = {
-        foldmethod='indent',
-      }
-    }
+        foldmethod = "indent",
+      },
+    },
   },
   root_files = {
-    {".root"},
-    {".git"}
+    { ".root" },
+    { ".git" },
   },
 }
 

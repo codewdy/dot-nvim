@@ -2,12 +2,12 @@ return {
   {
     "rachartier/tiny-code-action.nvim",
     dependencies = {
-      "folke/snacks.nvim"
+      "folke/snacks.nvim",
     },
     event = "LspAttach",
-    config = function ()
-      require("tiny-code-action").setup{
-        picker = {"snacks", opts = {}},
+    config = function()
+      require("tiny-code-action").setup({
+        picker = { "snacks", opts = {} },
         backend = "delta",
         backend_opts = {
           delta = {
@@ -20,11 +20,11 @@ return {
             }),
           },
         },
-        require("utils.action").register{
+        require("utils.action").register({
           name = "code-action",
-          actions = { code_action = require("tiny-code-action").code_action }
-        }
-      }
+          actions = { code_action = require("tiny-code-action").code_action },
+        }),
+      })
     end,
-  }
+  },
 }

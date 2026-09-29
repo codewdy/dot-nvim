@@ -1,20 +1,20 @@
 return {
-  'saghen/blink.cmp',
+  "saghen/blink.cmp",
   dependencies = {
-    'saghen/blink.lib',
+    "saghen/blink.lib",
     -- 'rafamadriz/friendly-snippets',
   },
   build = function()
-    require('blink.cmp').build():pwait()
+    require("blink.cmp").build():pwait()
   end,
 
   opts = {
     keymap = {
       preset = "enter",
-      ['<Tab>'] = { 'select_next', 'snippet_forward', 'fallback' },
-      ['<S-Tab>'] = { 'select_prev', 'snippet_backward', 'fallback' },
-      ['<C-l>'] = { 'snippet_forward', 'fallback' },
-      ['<S-h>'] = { 'snippet_backward', 'fallback' },
+      ["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
+      ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
+      ["<C-l>"] = { "snippet_forward", "fallback" },
+      ["<S-h>"] = { "snippet_backward", "fallback" },
       ["<C-j>"] = { "select_next", "fallback" },
       ["<C-k>"] = { "select_prev", "fallback" },
     },
@@ -29,7 +29,7 @@ return {
         show_first_line_only = true,
       },
     },
-    sources = { default = { 'lsp', 'path', 'snippets', 'buffer' } },
-    fuzzy = { implementation = "prefer_rust_with_warning" }
+    sources = { default = { "lsp", "path", "snippets", "buffer" } },
+    fuzzy = { implementation = "prefer_rust_with_warning" },
   },
 }

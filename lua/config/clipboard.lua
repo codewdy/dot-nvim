@@ -14,4 +14,3 @@ vim.g.clipboard = {
 }
 
 vim.opt.clipboard = "unnamed"
-

@@ -35,6 +35,3 @@ require("lazy").setup({
     colorscheme = { "vscode" },
   },
 })
-
-
-

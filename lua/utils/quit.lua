@@ -39,7 +39,8 @@ function M.close(opts)
   -- Wintabs can return without closing (e.g. an untracked/special buffer).
   -- Only fall back while still in the original window and buffer, so a partial
   -- success never quits the next tab. Native :quit keeps its unsaved-file checks.
-  if vim.api.nvim_win_is_valid(win)
+  if
+    vim.api.nvim_win_is_valid(win)
     and vim.api.nvim_get_current_win() == win
     and vim.api.nvim_win_get_buf(win) == buf
     and (not vim.bo[buf].modified or opts.bang)
@@ -98,8 +99,15 @@ function M.setup()
   for alias, target in pairs(aliases) do
     -- Expand only the entire command at the start of a ':' prompt.
     -- Typing '!' triggers expansion of 'q', then appends the bang to ConfigQuit.
-    vim.cmd(("cnoreabbrev <expr> %s getcmdtype() == ':' && getcmdline() == '%s' && getcmdpos() == %d ? '%s' : '%s'")
-      :format(alias, alias, #alias + 1, target, alias))
+    vim.cmd(
+      ("cnoreabbrev <expr> %s getcmdtype() == ':' && getcmdline() == '%s' && getcmdpos() == %d ? '%s' : '%s'"):format(
+        alias,
+        alias,
+        #alias + 1,
+        target,
+        alias
+      )
+    )
   end
 end
 

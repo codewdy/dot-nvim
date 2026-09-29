@@ -10,5 +10,5 @@ return {
       require("config.actions")
       require("lsp_conf")
     end,
-  }
+  },
 }

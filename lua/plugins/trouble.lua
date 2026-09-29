@@ -38,18 +38,19 @@ return {
       local quitting = false
 
       local function resize_sidebar()
-        if resizing
-            or not symbols_view
-            or not diagnostics_view
-            or not symbols_view.win:valid()
-            or not diagnostics_view.win:valid() then
+        if
+          resizing
+          or not symbols_view
+          or not diagnostics_view
+          or not symbols_view.win:valid()
+          or not diagnostics_view.win:valid()
+        then
           return
         end
 
         local symbols_win = symbols_view.win.win
         local diagnostics_win = diagnostics_view.win.win
-        local total_height = vim.api.nvim_win_get_height(symbols_win)
-          + vim.api.nvim_win_get_height(diagnostics_win)
+        local total_height = vim.api.nvim_win_get_height(symbols_win) + vim.api.nvim_win_get_height(diagnostics_win)
         local diagnostics_height = math.max(1, math.floor(total_height * 0.3))
 
         if vim.api.nvim_win_get_height(diagnostics_win) ~= diagnostics_height then
@@ -94,11 +95,13 @@ return {
 
       local function quit_if_only_sidebar_remains()
         vim.schedule(function()
-          if quitting
-              or not symbols_view
-              or not diagnostics_view
-              or not symbols_view.win:valid()
-              or not diagnostics_view.win:valid() then
+          if
+            quitting
+            or not symbols_view
+            or not diagnostics_view
+            or not symbols_view.win:valid()
+            or not diagnostics_view.win:valid()
+          then
             return
           end
 
@@ -143,7 +146,5 @@ return {
       end)
     end,
     cmd = "Trouble",
-  }
+  },
 }
-
-

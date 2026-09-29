@@ -12,11 +12,11 @@ end
 vim.api.nvim_create_autocmd("FileType", {
   callback = function()
     filetype = vim.bo.filetype
-    while type(configure.filetype[filetype]) == 'string' do
+    while type(configure.filetype[filetype]) == "string" do
       filetype = configure.filetype[filetype]
     end
     if configure.filetype[filetype] == nil then
-      filetype = 'default'
+      filetype = "default"
     end
 
     for k, v in pairs(configure.filetype[filetype].bo or {}) do
@@ -26,12 +26,12 @@ vim.api.nvim_create_autocmd("FileType", {
     for k, v in pairs(configure.filetype[filetype].wo or {}) do
       vim.wo[k] = v
     end
-  end
+  end,
 })
 
 -- auto chdir
 local function rootdir(root_files, file_path)
-  for _,p in ipairs(root_files) do
+  for _, p in ipairs(root_files) do
     local root = vim.fs.dirname(vim.fs.find(p, { path = file_path, upward = true })[1])
     if root then
       return root

@@ -1,11 +1,11 @@
 return {
   {
-    'zefei/vim-wintabs',
+    "zefei/vim-wintabs",
     config = function()
       vim.g.wintabs_autoclose_vim = true
       vim.g.wintabs_autoclose = 1
       require("utils.quit").setup()
-     end
+    end,
   },
-  "zefei/vim-wintabs-powerline"
+  "zefei/vim-wintabs-powerline",
 }
