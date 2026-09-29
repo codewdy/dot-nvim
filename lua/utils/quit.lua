@@ -23,6 +23,7 @@ function M.close(opts)
     return
   end
 
+  local win = vim.api.nvim_get_current_win()
   local buf = vim.api.nvim_get_current_buf()
   local modified = vim.bo[buf].modified
   -- WintabsClose has no bang variant. Suppress its save prompt for this buffer.
@@ -34,6 +35,17 @@ function M.close(opts)
   -- Also restore it if closing failed or was cancelled.
   if opts.bang and vim.api.nvim_buf_is_loaded(buf) then
     vim.bo[buf].modified = modified
+  end
+  -- Wintabs can return without closing (e.g. an untracked/special buffer).
+  -- Only fall back while still in the original window and buffer, so a partial
+  -- success never quits the next tab. Native :quit keeps its unsaved-file checks.
+  if vim.api.nvim_win_is_valid(win)
+    and vim.api.nvim_get_current_win() == win
+    and vim.api.nvim_win_get_buf(win) == buf
+    and (not vim.bo[buf].modified or opts.bang)
+  then
+    vim.cmd.quit({ bang = opts.bang or false })
+    return
   end
   if not ok then
     error(err, 0)
