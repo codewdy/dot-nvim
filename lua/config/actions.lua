@@ -3,5 +3,6 @@ require("utils.action").register{
   prioirty = 1000,
   actions = {
     lsp_rename = vim.lsp.buf.rename,
+    switch_source_header = function() vim.cmd[[ LspClangdSwitchSourceHeader ]] end,
   }
 }

@@ -73,7 +73,10 @@ return {
         lazygit = { enabled = true },
         quickfile = { enabled = true },
         terminal = { enabled = true },
-        notifier = { enabled = true },
+        notifier = {
+          enabled = true,
+          timeout = 10000,
+        },
         picker = {
           sources = {
             git_diff = {
