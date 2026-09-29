@@ -1,5 +1,6 @@
 local configure = require("config.configure")
 
+-- configure
 for k, v in pairs(configure.vim.o) do
   vim.o[k] = v
 end
@@ -28,6 +29,7 @@ vim.api.nvim_create_autocmd("FileType", {
   end
 })
 
+-- auto chdir
 local function rootdir(root_files, file_path)
   for _,p in ipairs(root_files) do
     local root = vim.fs.dirname(vim.fs.find(p, { path = file_path, upward = true })[1])
@@ -43,6 +45,23 @@ vim.api.nvim_create_autocmd("BufEnter", {
     local fn = vim.api.nvim_buf_get_name(0)
     if vim.fn.strcharpart(fn, 0, 1) == "/" then
       vim.cmd.cd(rootdir(configure.root_files, fn))
+    end
+  end,
+})
+
+-- auto format in save
+vim.api.nvim_create_autocmd("BufWritePre", {
+  group = vim.api.nvim_create_augroup("LspFormatOnSave", { clear = true }),
+  callback = function(ev)
+    if #vim.lsp.get_clients({
+      bufnr = ev.buf,
+      method = "textDocument/formatting",
+    }) > 0 then
+      vim.lsp.buf.format({
+        bufnr = ev.buf,
+        async = false,
+        timeout_ms = 2000,
+      })
     end
   end,
 })
