@@ -48,20 +48,3 @@ vim.api.nvim_create_autocmd("BufEnter", {
     end
   end,
 })
-
--- auto format in save
-vim.api.nvim_create_autocmd("BufWritePre", {
-  group = vim.api.nvim_create_augroup("LspFormatOnSave", { clear = true }),
-  callback = function(ev)
-    if #vim.lsp.get_clients({
-      bufnr = ev.buf,
-      method = "textDocument/formatting",
-    }) > 0 then
-      vim.lsp.buf.format({
-        bufnr = ev.buf,
-        async = false,
-        timeout_ms = 2000,
-      })
-    end
-  end,
-})
