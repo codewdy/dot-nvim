@@ -81,13 +81,23 @@ universal_normal_keymap("<C-f>", ':lua require("utils.action").show()<CR>', { no
 
 -- floaterm
 -- toggle
-universal_normal_keymap("<C-d>", ":FloatermToggle<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("t", "<C-d>", "<C-\\><C-n>:FloatermToggle<CR>", { noremap = true, silent = true })
+universal_normal_keymap("<C-d>", ':lua require("utils.floaterm").toggle(false)<CR>', { noremap = true, silent = true })
+vim.keymap.set(
+  "x",
+  "<C-d>",
+  '<Esc>:lua require("utils.floaterm").toggle(false, true)<CR>',
+  { noremap = true, silent = true }
+)
+vim.api.nvim_set_keymap(
+  "t",
+  "<C-d>",
+  '<C-\\><C-n>:lua require("utils.floaterm").toggle(true)<CR>',
+  { noremap = true, silent = true }
+)
 vim.api.nvim_set_keymap("t", "<C-n>", "<C-\\><C-n>:FloatermNew<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("t", "<C-h>", "<C-\\><C-n>:FloatermPrev<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("t", "<C-l>", "<C-\\><C-n>:FloatermNext<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("t", "<C-v>", "<C-\\><C-n>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("t", "<C-t>", "<C-\\><C-n>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("t", "<C-f>", "<C-\\><C-n>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap(
   "t",
   "<C-q>",
