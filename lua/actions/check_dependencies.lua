@@ -4,7 +4,6 @@ local tools = {
   { { "rg" }, "ripgrep: text search" },
   { { "fd", "fdfind", "rg", "find" }, "file search" },
   { { "delta" }, "Git and code-action previews" },
-  { { "difft" }, "Difftastic diff" },
   { { "lazygit" }, "Lazygit action" },
   { { "node" }, "JavaScript-based language servers and formatters" },
   { { "python3", "python" }, "Python-based language servers and formatters" },
