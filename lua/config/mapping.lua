@@ -72,8 +72,6 @@ vim.api.nvim_set_keymap("n", "<C-r>", ":lua vim.lsp.buf.rename()<CR>", { noremap
 universal_normal_keymap("<C-o>", ':lua Snacks.picker("files")<CR>', { noremap = true, silent = true })
 -- grep
 universal_normal_keymap("<C-p>", ':lua Snacks.picker("grep")<CR>', { noremap = true, silent = true })
---symbols
-universal_normal_keymap("<C-d>", ':lua Snacks.picker("lsp_symbols")<CR>', { noremap = true, silent = true })
 --diagnostic
 universal_normal_keymap("?", ':lua Snacks.picker("diagnostics")<CR>', { noremap = true, silent = true })
 --lsp_definitions
@@ -83,8 +81,8 @@ universal_normal_keymap("<C-f>", ':lua require("utils.action").show()<CR>', { no
 
 -- floaterm
 -- toggle
-universal_normal_keymap("<C-e>", ":FloatermToggle<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("t", "<C-e>", "<C-\\><C-n>:FloatermToggle<CR>", { noremap = true, silent = true })
+universal_normal_keymap("<C-d>", ":FloatermToggle<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("t", "<C-d>", "<C-\\><C-n>:FloatermToggle<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("t", "<C-n>", "<C-\\><C-n>:FloatermNew<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("t", "<C-h>", "<C-\\><C-n>:FloatermPrev<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("t", "<C-l>", "<C-\\><C-n>:FloatermNext<CR>", { noremap = true, silent = true })
