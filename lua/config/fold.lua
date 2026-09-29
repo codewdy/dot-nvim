@@ -63,21 +63,17 @@ function M.update(bufnr)
   end
 end
 
-function M.setup()
-  vim.opt.foldtext = "v:lua.require'config.fold'.text()"
-  local group = vim.api.nvim_create_augroup("AutoFoldMethod", { clear = true })
-  vim.api.nvim_create_autocmd({ "FileType", "BufWinEnter", "LspAttach", "LspDetach" }, {
-    group = group,
-    callback = function(event)
-      -- Wait for filetype setup and LSP detach to finish before checking capabilities.
-      vim.schedule(function()
-        M.update(event.buf)
-      end)
-    end,
-  })
-  M.update(vim.api.nvim_get_current_buf())
-end
-
-M.setup()
+vim.opt.foldtext = "v:lua.require'config.fold'.text()"
+local group = vim.api.nvim_create_augroup("AutoFoldMethod", { clear = true })
+vim.api.nvim_create_autocmd({ "FileType", "BufWinEnter", "LspAttach", "LspDetach" }, {
+  group = group,
+  callback = function(event)
+    -- Wait for filetype setup and LSP detach to finish before checking capabilities.
+    vim.schedule(function()
+      M.update(event.buf)
+    end)
+  end,
+})
+M.update(vim.api.nvim_get_current_buf())
 
 return M
