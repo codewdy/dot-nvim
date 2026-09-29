@@ -10,6 +10,38 @@ local function universal_normal_keymap(key, val, cfg)
   vim.api.nvim_set_keymap("v", key, "<Esc>" .. val, cfg)
 end
 
+local floaterm_group = vim.api.nvim_create_augroup("FloatermMappings", { clear = true })
+
+-- Commands run after leaving input/visual mode, preserving the terminal's state.
+-- Defaults to t/n/v; use modes to limit a mapping.
+local function floaterm_mapping(key, command, cfg)
+  cfg = vim.deepcopy(cfg or {})
+  local modes = cfg.modes or { "t", "n", "v" }
+  cfg.modes = nil
+  for _, mode in ipairs(modes) do
+    local prefix = ({ t = "<C-\\><C-n>", n = "", v = "<Esc>" })[mode]
+    assert(prefix, "floaterm_mapping supports t, n and v modes")
+    local quoted_command = string.format("%q", command):gsub("\\\n", "\\n")
+    local rhs = prefix
+      .. (':lua require("utils.floaterm").navigate(%s, %s, %s)<CR>'):format(
+        quoted_command,
+        tostring(mode == "t"),
+        tostring(mode == "v")
+      )
+    -- FileType covers first open when BufEnter precedes filetype setup.
+    vim.api.nvim_create_autocmd({ "BufEnter", "FileType" }, {
+      group = floaterm_group,
+      callback = function(event)
+        if vim.bo[event.buf].filetype ~= "floaterm" then
+          return
+        end
+        local opts = vim.tbl_extend("force", { silent = true }, cfg, { buffer = event.buf })
+        vim.keymap.set(mode, key, rhs, opts)
+      end,
+    })
+  end
+end
+
 -- Esc
 universal_keymap("<C-c>", "<Esc>", {})
 
@@ -80,27 +112,12 @@ universal_normal_keymap("<S-Tab>", ':lua Snacks.picker("lsp_definitions")<CR>', 
 universal_normal_keymap("<C-f>", ':lua require("utils.action").show()<CR>', { noremap = true, silent = true })
 
 -- floaterm
--- toggle
-universal_normal_keymap("<C-d>", ':lua require("utils.floaterm").toggle(false)<CR>', { noremap = true, silent = true })
-vim.keymap.set(
-  "x",
-  "<C-d>",
-  '<Esc>:lua require("utils.floaterm").toggle(false, true)<CR>',
-  { noremap = true, silent = true }
-)
-vim.api.nvim_set_keymap(
-  "t",
-  "<C-d>",
-  '<C-\\><C-n>:lua require("utils.floaterm").toggle(true)<CR>',
-  { noremap = true, silent = true }
-)
-vim.api.nvim_set_keymap("t", "<C-n>", "<C-\\><C-n>:FloatermNew<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("t", "<C-h>", "<C-\\><C-n>:FloatermPrev<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("t", "<C-l>", "<C-\\><C-n>:FloatermNext<CR>", { noremap = true, silent = true })
+universal_normal_keymap("<C-d>", ':lua require("utils.floaterm").toggle()<CR>', { noremap = true, silent = true })
+
+floaterm_mapping("<C-d>", "FloatermToggle")
+floaterm_mapping("<C-h>", "FloatermPrev")
+floaterm_mapping("<C-l>", "FloatermNext")
+floaterm_mapping("<C-q>", "FloatermKill\nFloatermToggle")
+floaterm_mapping("<C-n>", "FloatermNew")
 vim.api.nvim_set_keymap("t", "<C-f>", "<C-\\><C-n>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap(
-  "t",
-  "<C-q>",
-  "<C-\\><C-n>:FloatermKill<CR>:FloatermToggle<CR>",
-  { noremap = true, silent = true }
-)
+vim.api.nvim_set_keymap("t", "<C-D>", "<C-d>", { noremap = true, silent = true })
