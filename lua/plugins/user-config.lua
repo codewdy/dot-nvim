@@ -8,6 +8,7 @@ return {
       require("config.clipboard")
       require("config.mapping")
       require("config.actions")
+      require("config.fold")
       require("lsp_conf")
     end,
   },

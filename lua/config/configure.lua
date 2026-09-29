@@ -39,10 +39,6 @@ local configure = {
         shiftwidth = 2,
         softtabstop = 2,
       },
-      wo = {
-        foldmethod = "expr",
-        foldexpr = "nvim_treesitter#foldexpr()",
-      },
     },
     c = "cpp",
     h = "cpp",
@@ -53,19 +49,12 @@ local configure = {
         shiftwidth = 4,
         softtabstop = 4,
       },
-      wo = {
-        foldmethod = "expr",
-        foldexpr = "nvim_treesitter#foldexpr()",
-      },
     },
     default = {
       bo = {
         tabstop = 2,
         shiftwidth = 2,
         softtabstop = 2,
-      },
-      wo = {
-        foldmethod = "indent",
       },
     },
   },
