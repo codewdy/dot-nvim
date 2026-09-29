@@ -72,7 +72,8 @@ return {
         bigfile = { enabled = true },
         lazygit = { enabled = true },
         quickfile = { enabled = true },
-        terminal = { enable = true },
+        terminal = { enabled = true },
+        notifier = { enabled = true },
         picker = {
           sources = {
             git_diff = {

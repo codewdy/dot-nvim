@@ -30,6 +30,6 @@ return {
       },
     },
     sources = { default = { 'lsp', 'path', 'snippets', 'buffer' } },
-    fuzzy = { implementation = "rust" }
+    fuzzy = { implementation = "prefer_rust_with_warning" }
   },
 }
