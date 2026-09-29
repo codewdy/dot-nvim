@@ -26,6 +26,7 @@ return {
       ghost_text = {
         enabled = true,
         show_without_selection = true,
+        show_first_line_only = true,
       },
     },
     sources = { default = { 'lsp', 'path', 'snippets', 'buffer' } },
