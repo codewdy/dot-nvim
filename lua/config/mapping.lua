@@ -108,6 +108,8 @@ universal_normal_keymap("<C-p>", ':lua Snacks.picker("grep")<CR>', { noremap = t
 universal_normal_keymap("?", ':lua Snacks.picker("diagnostics")<CR>', { noremap = true, silent = true })
 --lsp_definitions
 universal_normal_keymap("<S-Tab>", ':lua Snacks.picker("lsp_definitions")<CR>', { noremap = true, silent = true })
+--git
+universal_normal_keymap("<S-Tab>", ":lua Snacks.lazygit()<CR>", { noremap = true, silent = true })
 -- all picker
 universal_normal_keymap("<C-f>", ':lua require("utils.action").show()<CR>', { noremap = true, silent = true })
 

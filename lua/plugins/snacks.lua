@@ -202,6 +202,7 @@ return {
         name = "snacks",
         actions = {
           lazygit = require("snacks").lazygit,
+          git = require("snacks").lazygit,
         },
       })
     end,
