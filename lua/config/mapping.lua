@@ -109,7 +109,7 @@ universal_normal_keymap("<C-o>", ':lua Snacks.picker("files")<CR>', { noremap = 
 -- grep
 universal_normal_keymap("<C-p>", ':lua Snacks.picker("grep")<CR>', { noremap = true, silent = true })
 --diagnostic
-universal_normal_keymap("?", ':lua Snacks.picker("diagnostics")<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "?", ':lua Snacks.picker("diagnostics")<CR>', { noremap = true, silent = true })
 --lsp_definitions
 universal_normal_keymap("<S-Tab>", ':lua Snacks.picker("lsp_definitions")<CR>', { noremap = true, silent = true })
 --git
