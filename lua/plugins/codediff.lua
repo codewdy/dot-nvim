@@ -5,6 +5,9 @@ return {
       diff = {
         layout = "inline",
       },
+      explorer = {
+        view_mode = "tree",
+      },
     })
     local function code_diff()
       vim.cmd([[ CodeDiff ]])
