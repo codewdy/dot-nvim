@@ -51,6 +51,10 @@ universal_normal_keymap("<C-s>", ":w<CR>", { noremap = true, silent = true })
 --Redo
 vim.api.nvim_set_keymap("n", "U", "<C-r>", { noremap = true })
 
+--fold toggle
+vim.api.nvim_set_keymap("n", "`", "za", { noremap = true })
+vim.api.nvim_set_keymap("n", "~", "zA", { noremap = true })
+
 -- visual tab
 vim.api.nvim_set_keymap("x", "<", "<gv", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("x", ">", ">gv", { noremap = true, silent = true })
@@ -109,7 +113,7 @@ universal_normal_keymap("?", ':lua Snacks.picker("diagnostics")<CR>', { noremap 
 --lsp_definitions
 universal_normal_keymap("<S-Tab>", ':lua Snacks.picker("lsp_definitions")<CR>', { noremap = true, silent = true })
 --git
-universal_normal_keymap("<S-Tab>", ":lua Snacks.lazygit()<CR>", { noremap = true, silent = true })
+universal_normal_keymap("<C-g>", ":lua Snacks.lazygit()<CR>", { noremap = true, silent = true })
 -- all picker
 universal_normal_keymap("<C-f>", ':lua require("utils.action").show()<CR>', { noremap = true, silent = true })
 
