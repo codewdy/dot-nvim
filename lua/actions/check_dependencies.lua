@@ -18,6 +18,7 @@ local tools = {
 
 -- These lspconfig commands are functions that prefer project-local executables.
 local local_servers = {
+  eslint = "vscode-eslint-language-server",
   cssls = "vscode-css-language-server",
   html = "vscode-html-language-server",
   jsonls = "vscode-json-language-server",

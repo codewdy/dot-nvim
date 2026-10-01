@@ -1,6 +1,7 @@
 require("lsp_conf.base")
 require("lsp_conf.lua_ls")
 require("lsp_conf.vtsls")
+require("lsp_conf.eslint")
 
 local servers = {
   -- lua
@@ -9,6 +10,7 @@ local servers = {
   "clangd",
   -- typescript
   "vtsls",
+  "eslint",
   -- python
   "basedpyright",
   -- json, jsonc
