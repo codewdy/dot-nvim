@@ -70,7 +70,17 @@ return {
     config = function()
       require("snacks").setup({
         bigfile = { enabled = true },
-        lazygit = { enabled = true },
+        lazygit = {
+          enabled = true,
+          win = {
+            keys = {
+              ["<C-g>"] = { "hide", mode = { "n", "t" } },
+              ["<C-c>"] = { "hide", mode = { "n", "t" } },
+              term_normal = false,
+              ["<Esc>"] = { "hide", mode = { "n", "t" } },
+            },
+          },
+        },
         quickfile = { enabled = true },
         terminal = { enabled = true },
         notifier = {
