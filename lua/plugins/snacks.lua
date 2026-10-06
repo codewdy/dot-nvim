@@ -75,6 +75,7 @@ return {
           win = {
             keys = {
               ["<C-g>"] = { "hide", mode = { "n", "t" } },
+              ["<C-d>"] = { "hide", mode = { "n", "t" } },
             },
           },
         },
