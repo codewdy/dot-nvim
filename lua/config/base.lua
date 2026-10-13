@@ -9,9 +9,34 @@ for k, v in pairs(configure.vim.g) do
   vim.g[k] = v
 end
 
-local function handle_root_config(config)
-  local override = config[vim.bo.filetype] or {}
-  local settings = vim.tbl_extend("force", {}, config["*"] or {}, override)
+local function filetype_settings(config, filetype, aliases)
+  local visited = {}
+  while not visited[filetype] do
+    visited[filetype] = true
+    local settings = config[filetype]
+    -- Only inherit aliases; configure's values were already applied before root's defaults.
+    if settings == nil and aliases and type(aliases[filetype]) == "string" then
+      settings = aliases[filetype]
+    end
+    if type(settings) ~= "string" then
+      return type(settings) == "table" and settings or {}
+    end
+    filetype = settings
+  end
+  return {}
+end
+
+local function apply_config()
+  local filetype = vim.bo.filetype
+  local root_config = vim.b.root_config or {}
+  local settings = vim.tbl_extend(
+    "force",
+    {},
+    configure["*"] or {},
+    filetype_settings(configure, filetype),
+    root_config["*"] or {},
+    filetype_settings(root_config, filetype, configure)
+  )
   for k, v in pairs(settings) do
     local ok, info = pcall(vim.api.nvim_get_option_info2, k, {})
     if ok and info.scope == "buf" then
@@ -23,27 +48,7 @@ local function handle_root_config(config)
 end
 
 vim.api.nvim_create_autocmd("FileType", {
-  callback = function()
-    local settings = configure.filetype[vim.bo.filetype]
-    while type(settings) == "string" do
-      settings = configure.filetype[settings]
-    end
-    if type(settings) ~= "table" then
-      settings = configure.filetype.default
-    end
-
-    for k, v in pairs(settings.bo or {}) do
-      vim.bo[k] = v
-    end
-
-    for k, v in pairs(settings.wo or {}) do
-      vim.wo[k] = v
-    end
-
-    if vim.b.root_config then
-      handle_root_config(vim.b.root_config)
-    end
-  end,
+  callback = apply_config,
 })
 
 -- auto chdir and load root config
@@ -59,8 +64,7 @@ local function load_root_config(root, fn)
 
   local valid, config = pcall(vim.json.decode, table.concat(lines, "\n"))
   if valid and type(config) == "table" then
-    vim.b.root_config = config
-    handle_root_config(config)
+    return config
   end
 end
 
@@ -83,7 +87,8 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
     if vim.fn.strcharpart(fn, 0, 1) == "/" then
       vim.api.nvim_buf_call(event.buf, function()
         vim.b.root_dir = rootdir(configure.root_files, fn)
-        load_root_config(configure.root_files[1], fn)
+        vim.b.root_config = load_root_config(configure.root_files[1], fn)
+        apply_config()
       end)
     end
   end,

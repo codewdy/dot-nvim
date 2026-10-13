@@ -32,31 +32,23 @@ local configure = {
       loaded_matchit = 1, -- disable matchit becasue ampping troubles.
     },
   },
-  filetype = {
-    cpp = {
-      bo = {
-        tabstop = 2,
-        shiftwidth = 2,
-        softtabstop = 2,
-      },
-    },
-    c = "cpp",
-    h = "cpp",
-    hpp = "cpp",
-    python = {
-      bo = {
-        tabstop = 4,
-        shiftwidth = 4,
-        softtabstop = 4,
-      },
-    },
-    default = {
-      bo = {
-        tabstop = 2,
-        shiftwidth = 2,
-        softtabstop = 2,
-      },
-    },
+  ["*"] = {
+    tabstop = 2,
+    shiftwidth = 2,
+    softtabstop = 2,
+  },
+  cpp = {
+    tabstop = 2,
+    shiftwidth = 2,
+    softtabstop = 2,
+  },
+  c = "cpp",
+  h = "cpp",
+  hpp = "cpp",
+  python = {
+    tabstop = 4,
+    shiftwidth = 4,
+    softtabstop = 4,
   },
   root_files = {
     { ".root.json", ".root" },
