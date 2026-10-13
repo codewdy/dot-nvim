@@ -2,6 +2,7 @@
 local tools = {
   { { "git" }, "plugin management and Git integration" },
   { { "rg" }, "ripgrep: text search" },
+  { { "fd" }, "generate_root: directory search" },
   { { "fd", "fdfind", "rg", "find" }, "file search" },
   { { "delta" }, "Git and code-action previews" },
   { { "lazygit" }, "Lazygit action" },
