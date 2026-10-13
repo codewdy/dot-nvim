@@ -1,3 +1,25 @@
+-- Filter before storage so all vim.diagnostic consumers see the same diagnostics.
+local diagnostic_set = vim.diagnostic.set
+vim.diagnostic.set = function(namespace, bufnr, diagnostics, opts)
+  local level = vim.b[bufnr].diagnostic_level
+  local threshold = type(level) == "string" and vim.diagnostic.severity[level:upper()] or nil
+  if type(threshold) ~= "number" then
+    threshold = vim.diagnostic.severity.INFO
+  end
+
+  local filtered = {}
+  for _, diagnostic in ipairs(diagnostics) do
+    local severity = diagnostic.severity or vim.diagnostic.severity.ERROR
+    if type(severity) == "string" then
+      severity = vim.diagnostic.severity[severity:upper()]
+    end
+    if severity <= threshold then
+      filtered[#filtered + 1] = diagnostic
+    end
+  end
+  return diagnostic_set(namespace, bufnr, filtered, opts)
+end
+
 vim.diagnostic.config({
   signs = {
     text = {
