@@ -9,14 +9,14 @@ for k, v in pairs(configure.vim.g) do
   vim.g[k] = v
 end
 
--- Project-wide options are applied before overrides for the actual buffer filetype.
 local function handle_root_config(config)
-  local override = (config.filetype or {})[vim.bo.filetype] or {}
-  for _, settings in ipairs({ config, override }) do
-    for k, v in pairs(settings.bo or {}) do
+  local override = config[vim.bo.filetype] or {}
+  local settings = vim.tbl_extend("force", {}, config["*"] or {}, override)
+  for k, v in pairs(settings) do
+    local ok, info = pcall(vim.api.nvim_get_option_info2, k, {})
+    if ok and info.scope == "buf" then
       vim.bo[k] = v
-    end
-    for k, v in pairs(settings.b or {}) do
+    else
       vim.b[k] = v
     end
   end
@@ -24,19 +24,19 @@ end
 
 vim.api.nvim_create_autocmd("FileType", {
   callback = function()
-    local filetype = vim.bo.filetype
-    while type(configure.filetype[filetype]) == "string" do
-      filetype = configure.filetype[filetype]
+    local settings = configure.filetype[vim.bo.filetype]
+    while type(settings) == "string" do
+      settings = configure.filetype[settings]
     end
-    if configure.filetype[filetype] == nil then
-      filetype = "default"
+    if type(settings) ~= "table" then
+      settings = configure.filetype.default
     end
 
-    for k, v in pairs(configure.filetype[filetype].bo or {}) do
+    for k, v in pairs(settings.bo or {}) do
       vim.bo[k] = v
     end
 
-    for k, v in pairs(configure.filetype[filetype].wo or {}) do
+    for k, v in pairs(settings.wo or {}) do
       vim.wo[k] = v
     end
 
@@ -47,7 +47,6 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- auto chdir and load root config
-
 local function load_root_config(root, fn)
   root = vim.fs.find(root, { path = fn, upward = true })[1]
   if not root then

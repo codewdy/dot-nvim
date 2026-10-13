@@ -1,6 +1,5 @@
 local default = {
-  filetype = vim.empty_dict(), -- Filetype-specific bo/b overrides, e.g. python = { b = { diagnostic_level = "WARN" } }
-  b = {
+  ["*"] = {
     disable_autoformat = false,
     diagnostic_level = "INFO", -- ERROR, WARN, INFO, HINT (minimum retained severity)
   },
