@@ -69,7 +69,24 @@ return {
 
       require("utils.action").register({
         name = "conform",
-        actions = { format = require("conform").format },
+        actions = {
+          format = conform.format,
+          save_directly = function()
+            vim.cmd("noautocmd write")
+          end,
+          disable_autoformat = function()
+            vim.b.disable_autoformat = true
+          end,
+          enbale_autoformat = function()
+            vim.b.disable_autoformat = false
+          end,
+          disable_global_autoformat = function()
+            vim.g.disable_autoformat = true
+          end,
+          enbale_global_autoformat = function()
+            vim.g.disable_autoformat = false
+          end,
+        },
       })
     end,
   },
