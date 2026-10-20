@@ -1,7 +1,7 @@
 return {
   {
     "folke/trouble.nvim",
-    event = "LspAttach",
+    event = "VimEnter",
     opts = {
       modes = {
         sidebar_symbols = {
