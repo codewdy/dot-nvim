@@ -26,7 +26,7 @@ return {
         git_placement = "signcolumn",
         show = {
           file = true,
-          folder = false,
+          folder = true,
           folder_arrow = false,
           git = true,
         },
@@ -76,6 +76,7 @@ return {
     },
   },
   config = function(_, opts)
+    require("utils.tree").setup_root_indent()
     require("nvim-tree").setup(opts)
     vim.api.nvim_create_autocmd("VimEnter", {
       group = vim.api.nvim_create_augroup("NvimTreeStartup", { clear = true }),

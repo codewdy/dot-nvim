@@ -1,4 +1,19 @@
 local M = {}
+local root_indent_patched = false
+
+function M.setup_root_indent()
+  if root_indent_patched then
+    return
+  end
+  -- nvim-tree omits markers at depth zero and has no root-indent option.
+  -- Shift every level together so ancestor lines and corner markers align.
+  local padding = require("nvim-tree.renderer.components.padding")
+  local get_indent_markers = padding.get_indent_markers
+  padding.get_indent_markers = function(depth, idx, count, node, markers, early_stop)
+    return get_indent_markers(depth + 1, idx, count, node, markers, early_stop)
+  end
+  root_indent_patched = true
+end
 
 function M.toggle_focus()
   if vim.bo.filetype ~= "NvimTree" then
