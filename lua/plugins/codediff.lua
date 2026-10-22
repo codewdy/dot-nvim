@@ -5,6 +5,12 @@ return {
       diff = {
         layout = "inline",
       },
+      keymaps = {
+        view = {
+          next_hunk = "<C-j>",
+          prev_hunk = "<C-k>",
+        },
+      },
       explorer = {
         view_mode = "tree",
       },
