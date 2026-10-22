@@ -106,8 +106,8 @@ vim.api.nvim_set_keymap("n", "<C-r>", ":lua vim.lsp.buf.rename()<CR>", { noremap
 -- picker
 -- file
 universal_normal_keymap("<C-o>", ':lua Snacks.picker("files")<CR>', { noremap = true, silent = true })
--- grep
-universal_normal_keymap("<C-p>", ':lua Snacks.picker("grep")<CR>', { noremap = true, silent = true })
+-- file tree
+universal_normal_keymap("<C-p>", ':lua require("utils.tree").toggle_focus()<CR>', { noremap = true, silent = true })
 --diagnostic
 vim.api.nvim_set_keymap("n", "?", ":lua vim.diagnostic.open_float()<CR>", { noremap = true, silent = true })
 --lsp_definitions

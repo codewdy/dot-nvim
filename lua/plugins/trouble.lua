@@ -112,16 +112,15 @@ return {
           end
 
           local windows = vim.api.nvim_list_wins()
-          if #windows ~= 2 then
-            return
-          end
-
           local sidebar_windows = {
             [symbols_view.win.win] = true,
             [diagnostics_view.win.win] = true,
           }
-          if not sidebar_windows[windows[1]] or not sidebar_windows[windows[2]] then
-            return
+          for _, win in ipairs(windows) do
+            local buf = vim.api.nvim_win_get_buf(win)
+            if not sidebar_windows[win] and vim.bo[buf].filetype ~= "NvimTree" then
+              return
+            end
           end
 
           quitting = true
