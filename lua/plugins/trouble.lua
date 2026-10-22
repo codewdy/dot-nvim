@@ -3,6 +3,12 @@ return {
     "folke/trouble.nvim",
     event = "VimEnter",
     opts = {
+      preview = {
+        -- Skip the preview overlay when cycling windows with Ctrl-w.
+        on_mount = function(win)
+          vim.api.nvim_win_set_config(win.win, { focusable = false })
+        end,
+      },
       modes = {
         sidebar_symbols = {
           mode = "symbols",
