@@ -17,6 +17,16 @@ function M.navigate(command, from_terminal_mode, from_visual_mode)
   end
 end
 
+function M.close_current()
+  if vim.bo.filetype ~= "floaterm" then
+    return
+  end
+  vim.cmd("FloatermKill")
+  if vim.fn["floaterm#buflist#curr"]() > 0 then
+    vim.cmd("FloatermShow")
+  end
+end
+
 function M.toggle()
   M.navigate("FloatermToggle")
 end

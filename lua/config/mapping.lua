@@ -123,7 +123,7 @@ universal_normal_keymap("<C-d>", ':lua require("utils.floaterm").toggle()<CR>', 
 floaterm_mapping("<C-d>", "FloatermToggle")
 floaterm_mapping("<C-h>", "FloatermPrev")
 floaterm_mapping("<C-l>", "FloatermNext")
-floaterm_mapping("<C-q>", "FloatermKill\nFloatermToggle")
+floaterm_mapping("<C-q>", 'lua require("utils.floaterm").close_current()')
 floaterm_mapping("<C-n>", "FloatermNew")
 vim.api.nvim_set_keymap("t", "<C-f>", "<C-\\><C-n>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("t", "<C-D>", "<C-d>", { noremap = true, silent = true })
