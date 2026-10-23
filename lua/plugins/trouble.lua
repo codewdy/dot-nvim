@@ -99,7 +99,23 @@ return {
         end)
       end
 
-      local function quit_if_only_sidebar_remains()
+      local function quit_if_only_sidebar_remains(event)
+        -- WinClosed also fires when Floaterm hides or nvim-tree replaces its
+        -- window while opening a directory. Only closing an editor can quit.
+        local closed_win = tonumber(event.match)
+        if not closed_win or not vim.api.nvim_win_is_valid(closed_win) then
+          return
+        end
+        local closed_buf = vim.api.nvim_win_get_buf(closed_win)
+        if
+          vim.bo[closed_buf].buftype ~= ""
+          or vim.bo[closed_buf].filetype == "NvimTree"
+          or vim.bo[closed_buf].filetype == "trouble"
+          or vim.fn.isdirectory(vim.api.nvim_buf_get_name(closed_buf)) == 1
+        then
+          return
+        end
+
         vim.schedule(function()
           if
             quitting
