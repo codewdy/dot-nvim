@@ -69,6 +69,11 @@ return {
     lazy = false,
     config = function()
       require("snacks").setup({
+        styles = {
+          notification = {
+            focusable = false,
+          },
+        },
         bigfile = { enabled = true },
         lazygit = {
           enabled = true,
